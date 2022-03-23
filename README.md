@@ -13,3 +13,15 @@ with Roblox Corporation. The documents provided here are not sourced directly
 from Roblox, but from third-party reverse-engineering efforts.
 
 [Roblox]: https://corp.roblox.com/
+
+## Categories
+Documents are divided into several categories.
+
+### Formats
+Documents describing file formats.
+
+Document     | Description
+-------------|------------
+[rbxl][rbxl] | Describes the binary format for place and model files. Such files often have the `.rbxl` or `.rbxm` file extensions.
+
+[rbxl]: formats/rbxl.md
