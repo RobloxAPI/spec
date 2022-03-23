@@ -555,7 +555,7 @@ The following table provides an overview:
 | 0x1A       | [Color3uint8][Color3uint8]               |
 | 0x1B       | [Int64][Int64]                           |
 | 0x1C       | [SharedString][SharedString]             |
-| 0x1D       | SignedString                             |
+| 0x1D       | (reserved)                               |
 | 0x1E       | [Optional][Optional]                     |
 | 0x1F       | [UniqueId][UniqueId]                     |
 | 0x20..0xFF | (reserved)                               |
