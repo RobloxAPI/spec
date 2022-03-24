@@ -334,7 +334,7 @@ Field              | Type       | Description
 Signature          | `[4]uint8` | Determines the type of the chunk and structure of Payload.
 CompressedLength   | `uint32`   | The length of Payload.
 UncompressedLength | `uint32`   | The length of Payload after decompression.
-Reserved           | `[8]uint8` | Reserved for future use.
+Reserved           | `[4]uint8` | Reserved for future use.
 Payload            | `[]uint8`  | The content of the chunk.
 
 If CompressedLength is 0, then the Payload is uncompressed, and its length is
