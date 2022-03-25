@@ -1086,11 +1086,11 @@ Corresponds the the "UniqueId" Roblox data type.
 
 A **UniqueId** is a structure with the following fields:
 
-Field    | Type     | Description
----------|----------|------------
-Index    | `uint32` | The sequential portion of the ID.
-Time     | `uint32` | The time portion of the ID.
-Random   | `zint64` | The random portion of the ID.
+Field    | Type      | Description
+---------|-----------|------------
+Index    | `uint32b` | The sequential portion of the ID.
+Time     | `uint32b` | The time portion of the ID.
+Random   | `zint64b` | The random portion of the ID.
 
 If encoding while not in [Place mode][Modes], properties of this type should be
 skipped.
