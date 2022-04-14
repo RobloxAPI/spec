@@ -33,5 +33,7 @@ format. These documents describe such formats.
 Document                         | Description
 ---------------------------------|------------
 [MaterialColors][MaterialColors] | Describes the binary format of the Terrain.MaterialColors property.
+[Tags][Tags]                     | Describes the binary format of the Instance.Tags property.
 
 [MaterialColors]: properties/MaterialColors.md
+[Tags]: properties/Tags.md
