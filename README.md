@@ -25,3 +25,13 @@ Document     | Description
 [rbxl][rbxl] | Describes the binary format for place and model files. Such files often have the `.rbxl` or `.rbxm` file extensions.
 
 [rbxl]: formats/rbxl.md
+
+### Properties
+Certain instance properties are serialized as binary data in a specialized
+format. These documents describe such formats.
+
+Document                         | Description
+---------------------------------|------------
+[MaterialColors][MaterialColors] | Describes the binary format of the Terrain.MaterialColors property.
+
+[MaterialColors]: properties/MaterialColors.md
