@@ -30,10 +30,12 @@ Document     | Description
 Certain instance properties are serialized as binary data in a specialized
 format. These documents describe such formats.
 
-Document                         | Description
----------------------------------|------------
-[MaterialColors][MaterialColors] | Describes the binary format of the Terrain.MaterialColors property.
-[Tags][Tags]                     | Describes the binary format of the Instance.Tags property.
+Document                                   | Description
+-------------------------------------------|------------
+[AttributesSerialize][AttributesSerialize] | Describes the binary format of the Instance.AttributesSerialize property.
+[MaterialColors][MaterialColors]           | Describes the binary format of the Terrain.MaterialColors property.
+[Tags][Tags]                               | Describes the binary format of the Instance.Tags property.
 
+[AttributesSerialize]: properties/AttributesSerialize.md
 [MaterialColors]: properties/MaterialColors.md
 [Tags]: properties/Tags.md
