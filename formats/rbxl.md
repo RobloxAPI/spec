@@ -558,7 +558,8 @@ The following table provides an overview:
 | 0x1D       | (reserved)                               |
 | 0x1E       | [Optional][Optional]                     |
 | 0x1F       | [UniqueId][UniqueId]                     |
-| 0x20..0xFF | (reserved)                               |
+| 0x20       | [Font][Font]                             |
+| 0x21..0xFF | (reserved)                               |
 
 The ID is the value of a [Values.TypeID][Values] field. The remaining IDs are
 reserved for future use. A decoder should return an error if it encounters an
@@ -1094,3 +1095,20 @@ Random   | `zint64b` | The random portion of the ID.
 
 If encoding while not in [Place mode][Modes], properties of this type should be
 skipped.
+
+## Font
+[Font]: #user-content-font
+
+Corresponds the the "Font" Roblox data type.
+
+- **ID**: 0x20
+- **Type**: `[]Font`
+
+A **Font** is a structure with the following fields:
+
+Field        | Type      | Description
+-------------|-----------|------------
+Family       | `string`  | Corresponds to `Font.Family`, of type `Content`.
+Weight       | `uint16`  | Corresponds to `Font.Weight`, of type `Enum.FontWeight`.
+Style        | `uint8`   | Corresponds to `Font.Style`, of type `Enum.FontStyle`.
+CachedFaceId | `string`  | `Content` pointing to a cached font face.
