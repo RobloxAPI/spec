@@ -20,11 +20,13 @@ Documents are divided into several categories.
 ### Formats
 Documents describing file formats.
 
-Document     | Description
--------------|------------
-[rbxl][rbxl] | Describes the binary format for place and model files. Such files often have the `.rbxl` or `.rbxm` file extensions.
+Document       | Description
+---------------|------------
+[rbxl][rbxl]   | Describes the binary format for place and model files. Such files often have the `.rbxl` or `.rbxm` file extensions.
+[rbxlx][rbxlx] | Describes the XML format for place and model files. Such files often have the `.rbxlx` or `.rbxmx` file extensions.
 
 [rbxl]: formats/rbxl.md
+[rbxlx]: formats/rbxlx.md
 
 ### Properties
 Certain instance properties are serialized as binary data in a specialized
