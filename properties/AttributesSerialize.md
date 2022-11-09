@@ -10,7 +10,9 @@ Type     | Example      | Description
 `intN`   | `int32`      | A signed integer with a size of `N` bits. Little-endian encoding.
 `uintN`  | `uint8`      | An unsigned signed integer with a size of `N` bits. Little-endian encoding.
 `floatN` | `float32`    | A IEEE 754 floating-point number with a size of `N` bits. Little-endian encoding.
+`[N]T`   | `[9]float32` | An array of constant length `N`, with elements of type `T`.
 `[]T`    | `[]uint8`    | An array with elements of type `T`, the length of which is determined dynamically.
+`?T`     | `?uint32`    | A value of type `T`, which may or may not be present based on some condition. If not present, the value is omitted entirely.
 `...`    | `...`        | The type is determined dynamically.
 
 A type may also be a named type defined elsewhere in the document.
@@ -81,6 +83,7 @@ The following table describes the identifier's corresponding type:
 |       15 | [Color3][Color3]                 |
 |       16 | [Vector2][Vector2]               |
 |       17 | [Vector3][Vector3]               |
+|       20 | [CFrame][CFrame]                 |
 |       23 | [NumberSequence][NumberSequence] |
 |       25 | [ColorSequence][ColorSequence]   |
 |       27 | [NumberRange][NumberRange]       |
@@ -194,6 +197,65 @@ Field | Type      | Description
 X     | `float32` | Corresponds to `Vector3.X`.
 Y     | `float32` | Corresponds to `Vector3.Y`.
 Z     | `float32` | Corresponds to `Vector3.Z`.
+
+### CFrame
+[CFrame]: #user-content-cframe
+
+The **CFrame** type corresponds to the `CFrame` Roblox data type. It is a
+structure with the following fields:
+
+Field    | Type                 | Description
+---------|----------------------|------------
+Position | [`Vector3`][Vector3] | The position portion of the CFrame.
+ID       | `uint8`              | A value representing a prefined rotation matrix.
+Rotation | `?[9]float32`        | The rotation portion of the CFrame. Present only if ID is 0.
+
+The indices of the rotation array correspond to the following matrix elements:
+
+| Right | Up | -Look |
+|------:|---:|------:|
+|     0 |  1 |     2 |
+|     3 |  4 |     5 |
+|     6 |  7 |     8 |
+
+Or, expressed as a CFrame constructor:
+
+```lua
+CFrame.new(_, _, _, 0, 1, 2, 3, 4, 5, 6, 7, 8)
+```
+
+#### Rotation IDs
+[RotationIDs]: #user-content-rotation-ids
+
+The following IDs must produce the corresponding rotation matrix. Non-zero IDs
+that aren't in this list are undefined.
+
+```
+0x02 : [+1 +0 +0 +0 +1 +0 +0 +0 +1]
+0x03 : [+1 +0 +0 +0 +0 -1 +0 +1 +0]
+0x05 : [+1 +0 +0 +0 -1 +0 +0 +0 -1]
+0x06 : [+1 +0 -0 +0 +0 +1 +0 -1 +0]
+0x07 : [+0 +1 +0 +1 +0 +0 +0 +0 -1]
+0x09 : [+0 +0 +1 +1 +0 +0 +0 +1 +0]
+0x0A : [+0 -1 +0 +1 +0 -0 +0 +0 +1]
+0x0C : [+0 +0 -1 +1 +0 +0 +0 -1 +0]
+0x0D : [+0 +1 +0 +0 +0 +1 +1 +0 +0]
+0x0E : [+0 +0 -1 +0 +1 +0 +1 +0 +0]
+0x10 : [+0 -1 +0 +0 +0 -1 +1 +0 +0]
+0x11 : [+0 +0 +1 +0 -1 +0 +1 +0 -0]
+0x14 : [-1 +0 +0 +0 +1 +0 +0 +0 -1]
+0x15 : [-1 +0 +0 +0 +0 +1 +0 +1 -0]
+0x17 : [-1 +0 +0 +0 -1 +0 +0 +0 +1]
+0x18 : [-1 +0 -0 +0 +0 -1 +0 -1 -0]
+0x19 : [+0 +1 -0 -1 +0 +0 +0 +0 +1]
+0x1B : [+0 +0 -1 -1 +0 +0 +0 +1 +0]
+0x1C : [+0 -1 -0 -1 +0 -0 +0 +0 -1]
+0x1E : [+0 +0 +1 -1 +0 +0 +0 -1 +0]
+0x1F : [+0 +1 +0 +0 +0 -1 -1 +0 +0]
+0x20 : [+0 +0 +1 +0 +1 -0 -1 +0 +0]
+0x22 : [+0 -1 +0 +0 +0 +1 -1 +0 +0]
+0x23 : [+0 +0 -1 +0 -1 -0 -1 +0 -0]
+```
 
 ### NumberSequence
 [NumberSequence]: #user-content-numbersequence
