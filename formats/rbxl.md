@@ -3,7 +3,7 @@ This document describes the binary format for Roblox place and model files.
 Common extensions for this format include `rbxl` (place) and `rbxm` (model). For
 brevity, this document will refer to the format as **RBXL**.
 
-The format is [backward-compatible](#user-content-legacy-format) with the [XML
+The format is [backward-compatible](#legacy-format) with the [XML
 format][RBXLX], which will be referred to as **RBXLX**.
 
 [RBXLX]: rbxlx.md
@@ -38,7 +38,7 @@ capitals, as shown here.
 # Preliminary concepts
 
 ## Type notation
-[types]: #user-content-type-notation
+[types]: #type-notation
 
 The following primitive types are defined for use throughout this document:
 
@@ -57,7 +57,7 @@ Type       | Example     | Description
 `...`      | `...`       | The type is determined dynamically.
 
 ### Endianness
-[Endianness]: #user-content-endianness
+[Endianness]: #endianness
 
 Types with the `E` suffix may be encoded in either "little-endian" or
 "big-endian". If the suffix is `b`, then big-endian is used. Otherwise, the
@@ -74,7 +74,7 @@ For example, the integer 305419896 can be encoded in the follow ways:
 | `uint32b` | `12 34 56 78` |
 
 ### Structures
-[structures]: #user-content-structures
+[structures]: #structures
 
 A "structure" type comprises a number of ordered fields, each having a certain
 type. This document describes structures by using a table with Field, Type and
@@ -91,7 +91,7 @@ Second | `bool`   | The second field, having a type of `bool`.
 Third  | `?int32` | The third field, having a type of `int32`, but is omitted based on some condition. For example, if field Second is false.
 
 ### Arrays
-[arrays]: #user-content-arrays
+[arrays]: #arrays
 
 When decoding or encoding an array, each element is read or written in order.
 For example, to encode value `A` of type `[2]Vector3`, each component would be
@@ -117,7 +117,7 @@ Section  | Description
 `~4`     | The bytes of the encoded array are interleaved with a byte size of 4.
 
 ## Strings
-[string]: #user-content-strings
+[string]: #strings
 
 The **string** type is defined to describe a variable sequence of bytes. It has
 the following structure:
@@ -128,7 +128,7 @@ Length | `uint32`  | The length of the string.
 Bytes  | `[]uint8` | The content of the string. The length is determined by the Length field.
 
 ## References
-[References]: #user-content-references
+[References]: #references
 
 The **References** type is defined as `[]zint32b~4` to describe an array of
 references. Before encoding to bytes, values in the array are
@@ -153,7 +153,7 @@ When encoding and decoding, there are several kinds of transformations that can
 be applied to values.
 
 ### Zigzag encoding
-[ZigzagEncoding]: #user-content-zigzag-encoding
+[ZigzagEncoding]: #zigzag-encoding
 
 Certain signed integer values are encoded with [Zigzag][zigzag] encoding to
 improve compression. The following pseudo-code describes an algorithm for
@@ -186,7 +186,7 @@ function DecodeZigzag(n: uintK): intK {
 [zigzag]: https://en.wikipedia.org/wiki/Variable-length_quantity#Zigzag_encoding
 
 ### Rotated encoding
-[RotatedEncoding]: #user-content-rotated-encoding
+[RotatedEncoding]: #rotated-encoding
 
 Certain float values are encoded by applying a circular shift to the bits of the
 value one bit to the left, such that the sign bit becomes the least significant
@@ -209,7 +209,7 @@ Decoding such a float is simply the reverse: apply a circular shift one bit to
 the right.
 
 ### Byte interleaving
-[Interleaving]: #user-content-byte-interleaving
+[Interleaving]: #byte-interleaving
 
 After encoding, the produced bytes of certain value types are **interleaved** to
 improve compression. A sequence is grouped by bytes of length N, then the first
@@ -228,7 +228,7 @@ where M is the the length of the bytes divided by N.
 For a particular type, N is the byte length of a value of the type.
 
 ## Modes
-[Modes]: #user-content-modes
+[Modes]: #modes
 
 The binary format has two "modes", which control certain conditions when
 encoding or decoding.
@@ -371,7 +371,7 @@ For improved compatibility, chunks should be expected in the following order:
 6. One [END][END]
 
 ## Metadata chunk
-[META]: #user-content-metadata-chunk
+[META]: #metadata-chunk
 
 A **Metadata** chunk payload contains an array that maps keys to values. It has
 the following structure:
@@ -396,7 +396,7 @@ Key                  | Values | Description
 `ExplicitAutoJoints` | `true` | Model was made in a workspace with Explicit AutoJointsMode.
 
 ## SharedStrings chunk
-[SSTR]: #user-content-sharedstrings-chunk
+[SSTR]: #sharedstrings-chunk
 
 A **SharedStrings** chunk payload contains an array of strings that may be
 shared by multiple properties. It has the following structure:
@@ -424,7 +424,7 @@ unused, with all bytes being 0.
 [BLAKE2b]: https://en.wikipedia.org/wiki/BLAKE2b#BLAKE2b_algorithm
 
 ## Instances chunk
-[INST]: #user-content-instances-chunk
+[INST]: #instances-chunk
 
 An **Instances** chunk payload contains an array of instances of a single class.
 It has the following structure:
@@ -447,7 +447,7 @@ IsService flag set to false.
 <VERIFY q="If HasService is non-zero?"/>
 
 ## Properties chunk
-[PROP]: #user-content-properties-chunk
+[PROP]: #properties-chunk
 
 A **Properties** chunk payload contains an array of values corresponding to one
 property for each instance in an [INST][INST] chunk. It has the following
@@ -460,7 +460,7 @@ Name    | `string`           | The name of the property.
 Values  | [`Values`][Values] | Contains the values of each property.
 
 ### Values
-[Values]: #user-content-values
+[Values]: #values
 
 **Values** has the following structure:
 
@@ -477,7 +477,7 @@ of the [INST][INST] chunk corresponding the PROP chunk. This length will be
 referred to as the "number of instances".
 
 ## Parents chunk
-[PRNT]: #user-content-parents-chunk
+[PRNT]: #parents-chunk
 
 A **Parents** chunk payload associates each instance with a parent instance. It
 has the following structure:
@@ -496,7 +496,7 @@ When decoding, each instance in the Children array has its Parent property set
 to the corresponding instance in the Parents array.
 
 ## End chunk
-[END]: #user-content-end-chunk
+[END]: #end-chunk
 
 An **End** chunk signals the end of the file, terminating the parsing of chunks.
 The payload is an unstructured sequence of bytes:
@@ -517,7 +517,7 @@ It is not necessary to consider the content of the payload when decoding. The
 payload is used for compatibility when transferring and storing the file.
 
 # Value types
-[Value types]: #user-content-value-types
+[Value types]: #value-types
 
 This section describes the structure of property value types within [PROP][PROP]
 chunks.
@@ -569,7 +569,7 @@ Each following subsection describes a **Type**, indicating the type of
 `ValueArray` for the type ID.
 
 ## String
-[String]: #user-content-string
+[String]: #string
 
 Corresponds to string-like types.
 
@@ -587,7 +587,7 @@ To properly decode back into the original string type, external information not
 available in the format will be required (e.g. class descriptors).
 
 ## Bool
-[Bool]: #user-content-bool
+[Bool]: #bool
 
 Corresponds to the "bool" Roblox data type.
 
@@ -595,7 +595,7 @@ Corresponds to the "bool" Roblox data type.
 - **Type**: `[]bool`
 
 ## Int
-[Int]: #user-content-int
+[Int]: #int
 
 Corresponds to the "int" Roblox data type.
 
@@ -603,7 +603,7 @@ Corresponds to the "int" Roblox data type.
 - **Type**: `[]zint32b~4`
 
 ## Float
-[Float]: #user-content-float
+[Float]: #float
 
 Corresponds to the "float" Roblox data type.
 
@@ -611,7 +611,7 @@ Corresponds to the "float" Roblox data type.
 - **Type**: `[]rfloat32b~4`
 
 ## Double
-[Double]: #user-content-double
+[Double]: #double
 
 Corresponds to the "double" Roblox data type.
 
@@ -619,7 +619,7 @@ Corresponds to the "double" Roblox data type.
 - **Type**: `[]float64`
 
 ## UDim
-[UDim]: #user-content-udim
+[UDim]: #udim
 
 Corresponds to the "UDim" Roblox data type.
 
@@ -634,7 +634,7 @@ Scale  | `rfloat32` | Corresponds to `UDim.Scale`.
 Offset | `zint32`   | Corresponds to `UDim.Offset`.
 
 ## UDim2
-[UDim2]: #user-content-udim2
+[UDim2]: #udim2
 
 Corresponds to the "UDim2" Roblox data type.
 
@@ -651,7 +651,7 @@ OffsetX | `zint32`   | Corresponds to `UDim2.X.Offset`.
 OffsetY | `zint32`   | Corresponds to `UDim2.Y.Offset`.
 
 ## Ray
-[Ray]: #user-content-ray
+[Ray]: #ray
 
 Corresponds to the "Ray" Roblox data type.
 
@@ -670,7 +670,7 @@ DirectionY | `float32` | Corresponds to `Ray.Direction.Y`.
 DirectionZ | `float32` | Corresponds to `Ray.Direction.Z`.
 
 ## Faces
-[Faces]: #user-content-faces
+[Faces]: #faces
 
 Corresponds to the "Faces" Roblox data type.
 
@@ -691,7 +691,7 @@ _      |   6 | Unused.
 _      |   7 | Unused.
 
 ## Axes
-[Axes]: #user-content-axes
+[Axes]: #axes
 
 Corresponds to the "Axes" Roblox data type.
 
@@ -712,7 +712,7 @@ _     |   6 | Unused.
 _     |   7 | Unused.
 
 ## BrickColor
-[BrickColor]: #user-content-brickcolor
+[BrickColor]: #brickcolor
 
 Corresponds to the "BrickColor" Roblox data type.
 
@@ -722,7 +722,7 @@ Corresponds to the "BrickColor" Roblox data type.
 Each element corresponds to the Number of a BrickColor.
 
 ## Color3
-[Color3]: #user-content-color3
+[Color3]: #color3
 
 Corresponds to the "Color3" Roblox data type.
 
@@ -738,7 +738,7 @@ G     | `rfloat32` | Corresponds to `Color3.G`.
 B     | `rfloat32` | Corresponds to `Color3.B`.
 
 ## Vector2
-[Vector2]: #user-content-vector2
+[Vector2]: #vector2
 
 Corresponds to the "Vector2" Roblox data type.
 
@@ -753,7 +753,7 @@ X     | `rfloat32` | Corresponds to `Vector2.X`.
 Y     | `rfloat32` | Corresponds to `Vector2.Y`.
 
 ## Vector3
-[Vector3]: #user-content-vector3
+[Vector3]: #vector3
 
 Corresponds to the "Vector3" Roblox data type.
 
@@ -769,7 +769,7 @@ Y     | `rfloat32` | Corresponds to `Vector3.Y`.
 Z     | `rfloat32` | Corresponds to `Vector3.Z`.
 
 ## Vector2int16
-[Vector2int16]: #user-content-vector2int16
+[Vector2int16]: #vector2int16
 
 Corresponds to the "Vector2int16" Roblox data type.
 
@@ -784,7 +784,7 @@ X     | `int16` | Corresponds to `Vector2int16.X`.
 Y     | `int16` | Corresponds to `Vector2int16.Y`.
 
 ## CFrame
-[CFrame]: #user-content-cframe
+[CFrame]: #cframe
 
 Corresponds to the "CFrame" Roblox data type.
 
@@ -822,7 +822,7 @@ CFrame.new(_, _, _, 0, 1, 2, 3, 4, 5, 6, 7, 8)
 ```
 
 ## Rotation IDs
-[RotationIDs]: #user-content-rotation-ids
+[RotationIDs]: #rotation-ids
 
 The following IDs must produce the corresponding rotation matrix. Non-zero IDs
 that aren't in this list are undefined.
@@ -855,7 +855,7 @@ that aren't in this list are undefined.
 ```
 
 ## CFrameQuat
-[CFrameQuat]: #user-content-cframequat
+[CFrameQuat]: #cframequat
 
 Corresponds to a quaternion representation of the "CFrame" Roblox data type.
 
@@ -887,7 +887,7 @@ The components of the quaternion are expected to be converted to a rotation
 matrix. The ID is the same as in the [CFrame][CFrame] type.
 
 ## Token
-[Token]: #user-content-token
+[Token]: #token
 
 Corresponds to the "EnumItem" Roblox data type.
 
@@ -899,7 +899,7 @@ in the format, and must be determined from an external source (e.g. class
 descriptors).
 
 ## Reference
-[Reference]: #user-content-reference
+[Reference]: #reference
 
 Corresponds to the "Instance" Roblox data type.
 
@@ -909,7 +909,7 @@ Corresponds to the "Instance" Roblox data type.
 Each element is the ID of an instance within the file.
 
 ## Vector3int16
-[Vector3int16]: #user-content-vector3int16
+[Vector3int16]: #vector3int16
 
 Corresponds to the "Vector3int16" Roblox data type.
 
@@ -925,7 +925,7 @@ Y     | `int16` | Corresponds to `Vector3int16.Y`.
 Z     | `int16` | Corresponds to `Vector3int16.Z`.
 
 ## NumberSequence
-[NumberSequence]: #user-content-numbersequence
+[NumberSequence]: #numbersequence
 
 Corresponds to the "NumberSequence" Roblox data type.
 
@@ -948,7 +948,7 @@ Value    | `float32` | Corresponds to `NumberSequenceKeypoint.Value`.
 Envelope | `float32` | Corresponds to `NumberSequenceKeypoint.Envelope`.
 
 ## ColorSequence
-[ColorSequence]: #user-content-colorsequence
+[ColorSequence]: #colorsequence
 
 Corresponds to the "ColorSequence" Roblox data type.
 
@@ -971,7 +971,7 @@ Value    | [`Color3`][Color3] | Corresponds to `ColorSequenceKeypoint.Value`.
 Envelope | `float32`          | Corresponds to `ColorSequenceKeypoint.Envelope`.
 
 ## NumberRange
-[NumberRange]: #user-content-numberrange
+[NumberRange]: #numberrange
 
 Corresponds to the "NumberRange" Roblox data type.
 
@@ -986,7 +986,7 @@ Min   | `float32` | Corresponds to `NumberRange.Min`.
 Max   | `float32` | Corresponds to `NumberRange.Max`.
 
 ## Rect
-[Rect]: #user-content-rect
+[Rect]: #rect
 
 Corresponds to the "Rect" Roblox data type.
 
@@ -1001,7 +1001,7 @@ Min   | [`Vector2`][Vector2] | Corresponds to `Rect.Min`.
 Max   | [`Vector2`][Vector2] | Corresponds to `Rect.Max`.
 
 ## PhysicalProperties
-[PhysicalProperties]: #user-content-physicalproperties
+[PhysicalProperties]: #physicalproperties
 
 Corresponds to the "PhysicalProperties" Roblox data type.
 
@@ -1020,7 +1020,7 @@ FrictionWeight   | `?float32` | Present if CustomPhysics is true. Corresponds to
 ElasticityWeight | `?float32` | Present if CustomPhysics is true. Corresponds to `PhysicalProperties.ElasticityWeight`.
 
 ## Color3uint8
-[Color3uint8]: #user-content-color3uint8
+[Color3uint8]: #color3uint8
 
 Corresponds to the "Color3uint8" Roblox data type.
 
@@ -1037,7 +1037,7 @@ B     | `uint8` | Corresponds to `Color3uint8.B`.
 
 
 ## Int64
-[Int64]: #user-content-int64
+[Int64]: #int64
 
 Corresponds to the "int64" Roblox data type.
 
@@ -1045,7 +1045,7 @@ Corresponds to the "int64" Roblox data type.
 - **Type**: `[]zint64b~8`
 
 ## SharedString
-[SharedString]: #user-content-sharedstring
+[SharedString]: #sharedstring
 
 Corresponds to the "SharedString" Roblox data type.
 
@@ -1055,7 +1055,7 @@ Corresponds to the "SharedString" Roblox data type.
 Each element is an index of the [SharedStrings.Strings][SSTR] array.
 
 ## Optional
-[Optional]: #user-content-optional
+[Optional]: #optional
 
 Corresponds to an optional Roblox data type.
 
@@ -1078,7 +1078,7 @@ Currently, only optional CFrames are known to be in use. Other types may throw
 an error.
 
 ## UniqueId
-[UniqueId]: #user-content-uniqueid
+[UniqueId]: #uniqueid
 
 Corresponds the the "UniqueId" Roblox data type.
 
@@ -1097,7 +1097,7 @@ If encoding while not in [Place mode][Modes], properties of this type should be
 skipped.
 
 ## Font
-[Font]: #user-content-font
+[Font]: #font
 
 Corresponds the the "Font" Roblox data type.
 

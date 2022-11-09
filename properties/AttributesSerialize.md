@@ -37,7 +37,7 @@ Dictionary:
 - Must not begin with `RBX`, which is reserved for Roblox.
 
 ## Dictionary
-[Dictionary]: #user-content-dictionary
+[Dictionary]: #dictionary
 
 The **Dictionary** type represents a collection of keys mapped to values. It is
 a structure with the following fields:
@@ -48,7 +48,7 @@ Length  | `uint32`           | The number of entries in the dictionary.
 Entries | [`[]Entry`][Entry] | The entries of the dictionary. The length is determined by the Length field.
 
 ## Entry
-[Entry]: #user-content-entry
+[Entry]: #entry
 
 The **Entry** type represents a single key-value pair from a
 [Dictionary][Dictionary]. It is a structure with the following fields:
@@ -59,7 +59,7 @@ Key   | [`String`][String] | The key of the entry.
 Value | [`Value`][Value]   | The value of the entry.
 
 ## Value
-[Value]: #user-content-value
+[Value]: #value
 
 The **Value** type holds a value of one of a number of types. It is a structure
 with the following fields:
@@ -94,7 +94,7 @@ Other IDs are reserved for future use.
 ## Value types
 
 ### String
-[String]: #user-content-string
+[String]: #string
 
 The **String** type corresponds to the "string" Roblox data type.
 
@@ -106,7 +106,7 @@ Length  | `uint32`  | The length of the string, in bytes.
 Content | `[]uint8` | The content of the string. The length is determined by the Length field.
 
 ### Bool
-[Bool]: #user-content-bool
+[Bool]: #bool
 
 The **Bool** type corresponds to the "bool" Roblox data type.
 
@@ -116,7 +116,7 @@ A value of 0 represents false, while 1 represents true. Any other value may be
 interpreted as true.
 
 ### Float
-[Float]: #user-content-float
+[Float]: #float
 
 The **Float** type corresponds to the "float" Roblox data type.
 
@@ -127,14 +127,14 @@ While Studio is not capable of producing attributes of the Float type
 decoding.
 
 ### Double
-[Double]: #user-content-double
+[Double]: #double
 
 The **Double** type corresponds to the "double" Roblox data type.
 
 **Type:** `float64`
 
 ### UDim
-[UDim]: #user-content-udim
+[UDim]: #udim
 
 The **UDim** type corresponds to the "UDim" Roblox data type. It is a structure
 with the following fields:
@@ -146,7 +146,7 @@ Offset | `int32`   | Corresponds to `UDim.Offset`.
 
 
 ### UDim2
-[UDim2]: #user-content-udim2
+[UDim2]: #udim2
 
 The **UDim2** type corresponds to the "UDim2" Roblox data type. It is a
 structure with the following fields:
@@ -157,14 +157,14 @@ X     | [`UDim`][UDim] | Corresponds to `UDim2.X`.
 Y     | [`UDim`][UDim] | Corresponds to `UDim2.Y`.
 
 ### BrickColor
-[BrickColor]: #user-content-brickcolor
+[BrickColor]: #brickcolor
 
 The **BrickColor** type corresponds to the "BrickColor" Roblox data type.
 
 **Type:** `uint32`
 
 ### Color3
-[Color3]: #user-content-color3
+[Color3]: #color3
 
 The **Color3** type corresponds to the "Color3" Roblox data type. It is a
 structure with the following fields:
@@ -176,7 +176,7 @@ G     | `float32` | Corresponds to `Color3.G`.
 B     | `float32` | Corresponds to `Color3.B`.
 
 ### Vector2
-[Vector2]: #user-content-vector2
+[Vector2]: #vector2
 
 The **Vector2** type corresponds to the "Vector2" Roblox data type. It is a
 structure with the following fields:
@@ -187,7 +187,7 @@ X     | `float32` | Corresponds to `Vector2.X`.
 Y     | `float32` | Corresponds to `Vector2.Y`.
 
 ### Vector3
-[Vector3]: #user-content-vector3
+[Vector3]: #vector3
 
 The **Vector3** type corresponds to the "Vector3" Roblox data type. It is a
 structure with the following fields:
@@ -199,7 +199,7 @@ Y     | `float32` | Corresponds to `Vector3.Y`.
 Z     | `float32` | Corresponds to `Vector3.Z`.
 
 ### CFrame
-[CFrame]: #user-content-cframe
+[CFrame]: #cframe
 
 The **CFrame** type corresponds to the `CFrame` Roblox data type. It is a
 structure with the following fields:
@@ -225,7 +225,7 @@ CFrame.new(_, _, _, 0, 1, 2, 3, 4, 5, 6, 7, 8)
 ```
 
 #### Rotation IDs
-[RotationIDs]: #user-content-rotation-ids
+[RotationIDs]: #rotation-ids
 
 The following IDs must produce the corresponding rotation matrix. Non-zero IDs
 that aren't in this list are undefined.
@@ -258,7 +258,7 @@ that aren't in this list are undefined.
 ```
 
 ### NumberSequence
-[NumberSequence]: #user-content-numbersequence
+[NumberSequence]: #numbersequence
 
 The **NumberSequence** type corresponds to the "NumberSequence" Roblox data
 type. It is a structure with the following fields:
@@ -269,7 +269,7 @@ Length    | `uint32`                                             | The length of
 Keypoints | [`[]NumberSequenceKeypoint`][NumberSequenceKeypoint] | The keypoints of the sequence, the length determined by the Length field.
 
 ### NumberSequenceKeypoint
-[NumberSequenceKeypoint]: #user-content-numbersequencekeypoint
+[NumberSequenceKeypoint]: #numbersequencekeypoint
 
 The **NumberSequenceKeypoint** type corresponds to the "NumberSequenceKeypoint"
 Roblox data type. It is a structure with the following fields:
@@ -281,7 +281,7 @@ Time     | `float32` | Corresponds to `NumberSequenceKeypoint.Time`.
 Value    | `float32` | Corresponds to `NumberSequenceKeypoint.Value`.
 
 ### ColorSequence
-[ColorSequence]: #user-content-colorsequence
+[ColorSequence]: #colorsequence
 
 The **ColorSequence** type corresponds to the "ColorSequence" Roblox data type.
 It is a structure with the following fields:
@@ -292,7 +292,7 @@ Length    | `uint32`                                           | The length of t
 Keypoints | [`[]ColorSequenceKeypoint`][ColorSequenceKeypoint] | The keypoints of the sequence, the length determined by the Length field.
 
 ### ColorSequenceKeypoint
-[ColorSequenceKeypoint]: #user-content-colorsequencekeypoint
+[ColorSequenceKeypoint]: #colorsequencekeypoint
 
 The **ColorSequenceKeypoint** type corresponds to the "ColorSequenceKeypoint"
 Roblox data type. It is a structure with the following fields:
@@ -304,7 +304,7 @@ Time     | `float32`          | Corresponds to `ColorSequenceKeypoint.Time`.
 Value    | [`Color3`][Color3] | Corresponds to `ColorSequenceKeypoint.Value`.
 
 ### NumberRange
-[NumberRange]: #user-content-numberrange
+[NumberRange]: #numberrange
 
 The **NumberRange** type corresponds to the "NumberRange" Roblox data type. It
 is a structure with the following fields:
@@ -315,7 +315,7 @@ Min   | `float32` | Corresponds to `NumberRange.Min`.
 Max   | `float32` | Corresponds to `NumberRange.Max`.
 
 ### Rect
-[Rect]: #user-content-rect
+[Rect]: #rect
 
 The **Rect** type corresponds to the "Rect" Roblox data type. It is a structure
 with the following fields:
