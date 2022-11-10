@@ -429,14 +429,14 @@ unused, with all bytes being 0.
 An **Instances** chunk payload contains an array of instances of a single class.
 It has the following structure:
 
-Field       | Type      | Description
-------------|-----------|------------
-ClassID     | `int32`   | Identifies the class.
-ClassName   | `string`  | The name of the class.
-HasService  | `bool`    | Whether the chunk has service data.
-Length      | `uint32`  | The number of instances in the chunk.
-IDs         | `[]int32` | An array of IDs identifying each instance, the length determined by the Length field.
-IsService   | `?[]bool` | An array of bools indicating whether the corresponding instance is a service, the length determined by the Length field.
+Field       | Type                       | Description
+------------|----------------------------|------------
+ClassID     | `int32`                    | Identifies the class.
+ClassName   | `string`                   | The name of the class.
+HasService  | `bool`                     | Whether the chunk has service data.
+Length      | `uint32`                   | The number of instances in the chunk.
+IDs         | [`References`][References] | An array of IDs identifying each instance, the length determined by the Length field.
+IsService   | `?[]bool`                  | An array of bools indicating whether the corresponding instance is a service, the length determined by the Length field.
 
 The IsService field is present only if HasService is true. If all elements of
 IsService would be false, then HasService should be false.
