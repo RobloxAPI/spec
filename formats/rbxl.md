@@ -428,9 +428,11 @@ shared by multiple properties. It has the following structure:
 
 Field    | Type                  | Description
 ---------|-----------------------|------------
-Reserved | `uint32`              | Reserved for future use.
+Version  | `int32`               | The version of the chunk.
 Length   | `uint32`              | The number of strings in the chunk.
 Strings  | `[]SharedStringValue` | The array of shared strings, the length determined by the Length field.
+
+The Version field is expected to be 0. Other versions should produce an error.
 
 In [PROP][PROP] chunks with the [SharedString][SharedString] value type, values
 are indices to the Strings array.
