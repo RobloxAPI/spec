@@ -132,16 +132,41 @@ Bytes  | `[]uint8` | The content of the string. The length is determined by the 
 
 The **References** type is defined as `[]zint32b~4` to describe an array of
 references. Before encoding to bytes, values in the array are
-difference-encoded. The following pseudo-code describes an algorithm for
-encoding and decoding:
+difference-encoded, such that the current value is added to the previous value
+to get the actual value.
+
+The following pseudo-code describes algorithms for encoding and decoding an
+array:
 
 ```
-function EncodeDifference(a Array) {
+function EncodeDifference(a: Array): Array {
+	b := new(Array)
+	prev := 0
+	for each value in a {
+		value, prev = value-prev, value
+		b.append(value)
+	}
+	return b
+}
+
+function DecodeDifference(a: Array): Array {
+	b := new(Array)
+	prev := 0
+	for each value in a {
+		value = value + prev
+		prev = value
+		b.append(value)
+	}
+	return b
+}
+
+function EncodeDifferenceInPlace(a: Array) {
 	for i = length(a)-1; i >= 1; i-- {
 		a[i] = a[i] - a[i-1]
 	}
 }
-function DecodeDifference(a Array) {
+
+function DecodeDifferenceInPlace(a: Array) {
 	for i = 1; i < length(a); i++ {
 		a[i] = a[i] + a[i-1]
 	}
