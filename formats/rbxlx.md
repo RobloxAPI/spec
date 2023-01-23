@@ -1102,7 +1102,7 @@ integer.
 ### Example
 
 ```xml
-<int name="Example">4294967295</int>
+<int name="Example">2147483647</int>
 ```
 
 ## int64
