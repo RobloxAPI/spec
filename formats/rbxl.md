@@ -522,6 +522,8 @@ decoded [INST][INST] chunks.
 When decoding, each instance in the Children array has its Parent property set
 to the corresponding instance in the Parents array.
 
+A parent reference of -1 is to be interpreted as the root of the tree.
+
 ## End chunk
 [END]: #end-chunk
 
