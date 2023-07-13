@@ -991,11 +991,13 @@ Keypoints | `[]ColorSequenceKeypoint` | The keypoints of the sequence, the lengt
 
 A **ColorSequenceKeypoint** is a structure with the following fields:
 
-Field    | Type               | Description
----------|--------------------|------------
-Time     | `float32`          | Corresponds to `ColorSequenceKeypoint.Time`.
-Value    | [`Color3`][Color3] | Corresponds to `ColorSequenceKeypoint.Value`.
-Envelope | `float32`          | Corresponds to `ColorSequenceKeypoint.Envelope`.
+Field    | Type      | Description
+---------|-----------|------------
+Time     | `float32` | Corresponds to `ColorSequenceKeypoint.Time`.
+Value.R  | `float32` | Corresponds to `ColorSequenceKeypoint.Value.R`.
+Value.G  | `float32` | Corresponds to `ColorSequenceKeypoint.Value.G`.
+Value.B  | `float32` | Corresponds to `ColorSequenceKeypoint.Value.B`.
+Envelope | `float32` | Corresponds to `ColorSequenceKeypoint.Envelope`.
 
 ## NumberRange
 [NumberRange]: #numberrange
