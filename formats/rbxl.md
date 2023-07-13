@@ -820,9 +820,9 @@ Corresponds to the "CFrame" Roblox data type.
 
 A **CFrames** is a structure with the following fields:
 
-Field    | Type            | Description
----------|-----------------|------------
-Rotation | `[]Matrix`      | The rotation parts of each CFrame.
+Field    | Type           | Description
+---------|----------------|------------
+Rotation | `[]Matrix`     | The rotation parts of each CFrame.
 Position | `[]Vector3~12` | The position parts of each CFrame.
 
 The length of each array is equal to the number of instances.
@@ -893,9 +893,9 @@ Corresponds to a quaternion representation of the "CFrame" Roblox data type.
 
 A **CFrameQuats** is a structure with the following fields:
 
-Field    | Type            | Description
----------|-----------------|------------
-Rotation | `[]Quat`        | The rotation parts of each CFrame.
+Field    | Type           | Description
+---------|----------------|------------
+Rotation | `[]Quat`       | The rotation parts of each CFrame.
 Position | `[]Vector3~12` | The position parts of each CFrame.
 
 The length of each array is equal to the number of instances.
