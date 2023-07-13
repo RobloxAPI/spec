@@ -655,10 +655,10 @@ Corresponds to the "UDim" Roblox data type.
 
 A **UDim** is a structure with the following fields:
 
-Field  | Type       | Description
--------|------------|------------
-Scale  | `rfloat32` | Corresponds to `UDim.Scale`.
-Offset | `zint32`   | Corresponds to `UDim.Offset`.
+Field  | Type        | Description
+-------|-------------|------------
+Scale  | `rfloat32b` | Corresponds to `UDim.Scale`.
+Offset | `zint32`    | Corresponds to `UDim.Offset`.
 
 ## UDim2
 [UDim2]: #udim2
@@ -670,12 +670,12 @@ Corresponds to the "UDim2" Roblox data type.
 
 A **UDim2** is a structure with the following fields:
 
-Field   | Type       | Description
---------|------------|------------
-ScaleX  | `rfloat32` | Corresponds to `UDim2.X.Scale`.
-ScaleY  | `rfloat32` | Corresponds to `UDim2.Y.Scale`.
-OffsetX | `zint32`   | Corresponds to `UDim2.X.Offset`.
-OffsetY | `zint32`   | Corresponds to `UDim2.Y.Offset`.
+Field   | Type        | Description
+--------|-------------|------------
+ScaleX  | `rfloat32b` | Corresponds to `UDim2.X.Scale`.
+ScaleY  | `rfloat32b` | Corresponds to `UDim2.Y.Scale`.
+OffsetX | `zint32`    | Corresponds to `UDim2.X.Offset`.
+OffsetY | `zint32`    | Corresponds to `UDim2.Y.Offset`.
 
 ## Ray
 [Ray]: #ray
@@ -758,11 +758,11 @@ Corresponds to the "Color3" Roblox data type.
 
 A **Color3** is a structure with the following fields:
 
-Field | Type       | Description
-------|------------|------------
-R     | `rfloat32` | Corresponds to `Color3.R`.
-G     | `rfloat32` | Corresponds to `Color3.G`.
-B     | `rfloat32` | Corresponds to `Color3.B`.
+Field | Type        | Description
+------|-------------|------------
+R     | `rfloat32b` | Corresponds to `Color3.R`.
+G     | `rfloat32b` | Corresponds to `Color3.G`.
+B     | `rfloat32b` | Corresponds to `Color3.B`.
 
 ## Vector2
 [Vector2]: #vector2
@@ -774,10 +774,10 @@ Corresponds to the "Vector2" Roblox data type.
 
 A **Vector2** is a structure with the following fields:
 
-Field | Type       | Description
-------|------------|------------
-X     | `rfloat32` | Corresponds to `Vector2.X`.
-Y     | `rfloat32` | Corresponds to `Vector2.Y`.
+Field | Type        | Description
+------|-------------|------------
+X     | `rfloat32b` | Corresponds to `Vector2.X`.
+Y     | `rfloat32b` | Corresponds to `Vector2.Y`.
 
 ## Vector3
 [Vector3]: #vector3
@@ -789,11 +789,11 @@ Corresponds to the "Vector3" Roblox data type.
 
 A **Vector3** is a structure with the following fields:
 
-Field | Type       | Description
-------|------------|------------
-X     | `rfloat32` | Corresponds to `Vector3.X`.
-Y     | `rfloat32` | Corresponds to `Vector3.Y`.
-Z     | `rfloat32` | Corresponds to `Vector3.Z`.
+Field | Type        | Description
+------|-------------|------------
+X     | `rfloat32b` | Corresponds to `Vector3.X`.
+Y     | `rfloat32b` | Corresponds to `Vector3.Y`.
+Z     | `rfloat32b` | Corresponds to `Vector3.Z`.
 
 ## Vector2int16
 [Vector2int16]: #vector2int16
