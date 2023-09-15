@@ -82,7 +82,7 @@ Attribute                       | Value
 - **Child of:** [`<roblox>`][roblox]
 - **Contains:** text
 
-Maps a metadata key to a value. Only present in `rbxm` files.
+Maps a metadata key to a value. Only present in `rbxmx` files.
 
 The following attributes are required:
 
