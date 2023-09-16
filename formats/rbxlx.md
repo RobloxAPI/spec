@@ -613,7 +613,7 @@ most-significant:
 - **Property type:** Font
 - **Contains:** elements
 
-Contains elements for each component of the font.
+Contains elements for each component of the Font.
 
 - `Family`: Value is interpreted according to the [Content][Content] type.
 - `Weight`: Text content is formatted as an integer representing the value of a
@@ -822,7 +822,7 @@ Each element is interpreted according to the [Vector3][Vector3] type.
 - **Property type:** Rect
 - **Contains:** elements
 
-Contains elements for each component of the Ray:
+Contains elements for each component of the Rect:
 
 - `min`
 - `max`
@@ -870,7 +870,7 @@ shared string, which is Base64-encoded.
 - **Property type:** UDim
 - **Contains:** elements
 
-Contains elements for each component of the Ray:
+Contains elements for each component of the UDim:
 
 - `S`: Represents the Scale component. Interpreted as a [`<float>`][float].
 - `O`: Represents the Offset component. Interpreted as an [`<int>`][int].
@@ -892,7 +892,7 @@ Contains elements for each component of the Ray:
 - **Property type:** UDim2
 - **Contains:** elements
 
-Contains elements for each component of the Ray:
+Contains elements for each component of the UDim2:
 
 - `XS`: Represents the X.Scale component. Interpreted as a [`<float>`][float].
 - `XO`: Represents the X.Offset component. Interpreted as an [`<int>`][int].
